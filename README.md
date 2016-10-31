@@ -34,9 +34,3 @@ Stuff I used to develop the app ...
 
 # But why tho? ...
 Well, I'm just trying to gain some experience in building webapps I guess ¯\\_(ツ)\_/¯
-
-dog | bird | cat
-----|------|----
-foo | foo  | foo
-bar | bar  | bar
-baz | baz  | baz
