@@ -16,6 +16,7 @@ This site is built on the [angular2](https://angular.io/docs/ts/latest/) framewo
 # How the eff does it even ? ...
 #### What this uses in the wild ...
 [Demo site in the wild](https://benwinding.github.io/angular2-wakepark-teaser/)
+
 | Layer | Technology | Function |
 | --- | --- | --- |
 | 0. | webserver | Simple webserver to serve up the website! |
@@ -23,6 +24,7 @@ This site is built on the [angular2](https://angular.io/docs/ts/latest/) framewo
 
 #### Developing this thing ...
 Stuff I used to develop the app ...
+
 | Layer | Technology | Function |
 | --- |--- | --- |
 | 0. | nodejs | Server written for javascript stuff |
@@ -33,4 +35,8 @@ Stuff I used to develop the app ...
 # But why tho? ...
 Well, I'm just trying to gain some experience in building webapps I guess ¯\\_(ツ)\_/¯
 
-
+dog | bird | cat
+----|------|----
+foo | foo  | foo
+bar | bar  | bar
+baz | baz  | baz
