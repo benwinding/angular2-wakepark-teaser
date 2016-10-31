@@ -15,20 +15,20 @@ export class DayshoursPipe implements PipeTransform {
       minutesLeft + " Minute, " +
       secondsLeft + " Seconds";
   }
-  
+
   getSecondsLeft(totalSecondsLeft: number): number{
     return totalSecondsLeft % 60;
   }
-  
+
   getMinutesLeft(totalSecondsLeft: number): number{
     return Math.floor((totalSecondsLeft % (60 * 60)) / 60);
   }
-  
+
   getHoursLeft(totalSecondsLeft: number): number{
     return Math.floor((totalSecondsLeft % (60 * 60 * 60)) / (60 * 60));
   }
-  
+
   getDaysLeft(totalSecondsLeft: number): number{
-    return Math.floor((totalSecondsLeft % (60 * 60 * 60 * 24)) / (60 * 60 * 24));
+    return Math.floor(totalSecondsLeft / (60 * 60 * 24));
   }
 }
