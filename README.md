@@ -17,14 +17,14 @@ This site is built on the [angular2](https://angular.io/docs/ts/latest/) framewo
 #### What this uses in the wild ...
 [Demo site in the wild](https://benwinding.github.io/angular2-wakepark-teaser/)
 | Layer | Technology | Function |
-|--- |--- |---|
+| --- | --- | --- |
 | 0. | webserver | Simple webserver to serve up the website! |
 | 1. | bundled app | The bundled version of this app (dist folder)! |
 
 #### Developing this thing ...
 Stuff I used to develop the app ...
 | Layer | Technology | Function |
-|--- |--- |---|
+| --- |--- | --- |
 | 0. | nodejs | Server written for javascript stuff |
 | 1. | npm (node package manager) | Manages javascript frameworks and libs |
 | 2. | angular2 | The client side javascript framework, runs in your browser |
