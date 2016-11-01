@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  display: block;
+  margin: 0;
+}
+
+.accordion-layout > .ui-accordion .ui-accordion-content{
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
