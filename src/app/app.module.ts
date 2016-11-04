@@ -9,8 +9,8 @@ import { DayshoursPipe } from './dayshours.pipe';
 import { Preview3dComponent } from './preview3d/preview3d.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapPreviewComponent } from "./google-map-preview-component/google-map-preview.component";
-import {TabViewModule} from "primeng/components/tabview/tabview";
-import {AccordionModule} from "primeng/components/accordion/accordion";
+import {TabViewModule} from "primeng/primeng";
+import {AccordionModule} from "primeng/primeng";
 
 @NgModule({
   declarations: [
