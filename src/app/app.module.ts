@@ -11,6 +11,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapPreviewComponent } from "./google-map-preview-component/google-map-preview.component";
 import {TabViewModule} from "primeng/primeng";
 import {AccordionModule} from "primeng/primeng";
+import {ButtonModule} from "primeng/components/button/button";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {AccordionModule} from "primeng/primeng";
       apiKey: 'AIzaSyD4mNT9idnzqmKFvioFe2FFElACpprUBH4'
     }),
     TabViewModule,
-    AccordionModule
+    AccordionModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

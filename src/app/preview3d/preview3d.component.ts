@@ -28,6 +28,36 @@ export class Preview3dComponent implements OnInit {
     this.Init();
   }
   
+  private IsPackedUp: boolean = true;
+  
+  addStlToScene(path: string){
+    var loader = new STLLoader();
+    var scene = this.scene;
+    loader.load( path,  function (geometry){
+      var material = new THREE.MeshPhongMaterial( { color: 0xf4a460, specular: 0x111111, shininess: 20 } );
+      var mesh = new THREE.Mesh( geometry, material );
+    
+      var scale = 1/1000;
+      mesh.scale.set(scale,scale,scale);
+      mesh.position.setZ( -2 );
+    
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    
+      scene.add( mesh );
+    });
+  }
+  
+  onClickSwitch(){
+    this.scene.children.pop();
+    if(this.IsPackedUp)
+      this.addStlToScene('./assets/V3-Setup.stl');
+    else
+      this.addStlToScene('./assets/V3-PackedUp.stl');
+    
+    this.IsPackedUp = !this.IsPackedUp;
+  }
+  
   Init(){
     this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth/window.innerHeight , 1, 50 );
     this.camera.position.set( 8, 2, 8 );
@@ -55,22 +85,6 @@ export class Preview3dComponent implements OnInit {
     
     this.scene.add( plane );
     
-    var loader = new STLLoader();
-    loader.load( './assets/V3-PackedUp.stl',  function (geometry){
-    
-      var material = new THREE.MeshPhongMaterial( { color: 0xf4a460, specular: 0x111111, shininess: 20 } );
-      var mesh = new THREE.Mesh( geometry, material );
-    
-      var scale = 1/1000;
-      mesh.scale.set(scale,scale,scale);
-      mesh.position.setZ( -2 );
-    
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-    
-      scene.add( mesh );
-    });
-  
     this.scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) );
   
     this.addShadowedLight( 10, 10, 10, 0xffffff, 1.35 );
@@ -95,7 +109,9 @@ export class Preview3dComponent implements OnInit {
     controls.maxDistance = 20; // maximum zoom
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
-    
+  
+    this.addStlToScene('./assets/V3-PackedUp.stl');
+
     this.animate();
   }
   
