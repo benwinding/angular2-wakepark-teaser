@@ -83,7 +83,7 @@ export class Preview3dComponent implements OnInit {
     var controls = new THREE.OrbitControls(this.camera, this.container);
     this.controls = controls;
     controls.autoRotate = true; // turn on auto rotate
-    controls.autoRotateSpeed = 0.05; // speed of auto rotate
+    controls.autoRotateSpeed = 0.06; // speed of auto rotate
     controls.enableDamping = true; // add inertia
     controls.dampingFactor = 0.1; // inertia dampening
     controls.rotateSpeed = 0.1; // set rotation sensitivity
