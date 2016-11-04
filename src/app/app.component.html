@@ -1,10 +1,10 @@
 <app-header></app-header>
-<p-accordion [multiple]="true" class="accordion-layout">
-  <p-accordionTab header="3D Stuff" leftIcon="fa-cubes" [selected]="true">
+<p-accordion>
+  <p-accordionTab header="3D Stuff" [selected]="true">
     <app-preview3d [container]="renderHere"></app-preview3d>
     <div #renderHere></div>
   </p-accordionTab>
-  <p-accordionTab header="Map" leftIcon="fa-map-o" [selected]="true">
+  <p-accordionTab header="Map" >
     <app-google-map-preview></app-google-map-preview>
   </p-accordionTab>
 </p-accordion>

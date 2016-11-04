@@ -35,12 +35,15 @@ export class Preview3dComponent implements OnInit {
     var scene = new THREE.Scene();
     this.scene = scene;
     
+    // Fog
+    scene.fog = new THREE.Fog( 0xffffff, 8, 30 );
+    
     // Ground
     var planeMat = new THREE.MeshPhongMaterial();
     planeMat.color.setRGB(0,0,0.8);
   
     var plane = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( 40, 40 ),
+      new THREE.PlaneBufferGeometry( 100, 100 ),
       planeMat
     );
   
@@ -76,7 +79,8 @@ export class Preview3dComponent implements OnInit {
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.renderer.shadowMapEnabled = true;
-  
+    this.renderer.setClearColor( scene.fog.color );
+    
     this.container.appendChild( this.renderer.domElement );
   
     window.addEventListener( 'resize', this.onWindowResize, false );
