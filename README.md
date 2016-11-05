@@ -1,8 +1,8 @@
 # What the hell is this? ...
 This is basically a little website for a kite boarding event I'm involved in. It features:
 + Count down to the event in seconds, how exciting!!
-+ Location information, using google maps (Coming Soon)
-+ 3D preview of kiteboarding obstacles (Coming Soon)
++ Location information, using google maps!!
++ 3D preview of kiteboarding obstacles!!
   + Kicker (ramp)
   + Slider (rail)
 
@@ -33,4 +33,4 @@ Stuff I used to develop the app ...
 | 3. | thisApp | The stuff I made! |
 
 # But why tho? ...
-Well, I'm just trying to gain some experience in building webapps I guess ¯\\_(ツ)\_/¯
+Well, I'm just trying to gain some experience in building webapps I guess ¯\\__(ツ)_/¯
