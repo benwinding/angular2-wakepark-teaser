@@ -12,6 +12,7 @@ import { GoogleMapPreviewComponent } from "./google-map-preview-component/google
 import {TabViewModule} from "primeng/primeng";
 import {AccordionModule} from "primeng/primeng";
 import {ButtonModule} from "primeng/components/button/button";
+import {ThreeSceneService} from "./preview3d/three-scene.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {ButtonModule} from "primeng/components/button/button";
     AccordionModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [ThreeSceneService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
