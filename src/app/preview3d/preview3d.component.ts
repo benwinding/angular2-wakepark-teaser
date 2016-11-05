@@ -68,8 +68,8 @@ export class Preview3dComponent implements OnInit {
     this.addShadowedLight( 5, 10, -10, 0xffaa00, 1 );
     
     this.container.appendChild( this.renderService.renderer.domElement );
-
-    window.addEventListener( 'resize', this.onWindowResize, false );
+  
+    window.addEventListener( 'resize', _ => this.onWindowResize());
 
     var controls = new THREE.OrbitControls(this.camera, this.container);
     this.controls = controls;
@@ -103,13 +103,12 @@ export class Preview3dComponent implements OnInit {
   }
 
   public onWindowResize() {
-    console.trace("Resizing render container");
-    const width = this.container.clientWidth;
+    const width = window.innerWidth;
     const height = width * 0.72;
-  
+
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
-  
+
     this.renderService.renderer.setSize(width, height);
   }
 
