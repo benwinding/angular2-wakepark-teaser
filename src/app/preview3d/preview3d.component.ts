@@ -32,21 +32,25 @@ export class Preview3dComponent implements OnInit {
   }
 
   private IsPackedUp: boolean = true;
-  
-  onClickSwitch(){
-    this.sceneService.scene.children.pop();
-    if(this.IsPackedUp)
-      this.sceneService.addStlToScene('./assets/V3-Setup.stl', 1/1000, 0,0,2, 0xf4a460);
-    else
-      this.sceneService.addStlToScene('./assets/V3-PackedUp-Lower.stl', 1/1000, 0,0,2, 0xf4a460);
+  private pathSetUp: string = './assets/V3-Setup-Lower.stl';
+  private pathPackedUp: string = './assets/V3-PackedUp-Lower.stl';
 
+  onClickSwitch(){
+    if(this.IsPackedUp){
+      this.sceneService.removeFromScene(this.pathSetUp);
+      this.sceneService.addStlToScene(this.pathPackedUp, 1/1000, 0,0,2, 0xf4a460);
+    }
+    else{
+      this.sceneService.removeFromScene(this.pathPackedUp);
+      this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
+    }
     this.IsPackedUp = !this.IsPackedUp;
   }
 
   Init(){
     this.camera = new THREE.PerspectiveCamera(35 , window.innerWidth/window.innerHeight , 1, 50 );
     this.camera.position.set( 8, 2, 8 );
-  
+
     // Ground
     var planeMat = new THREE.MeshPhongMaterial();
     planeMat.color.setRGB(0,0,0.8);
@@ -57,7 +61,7 @@ export class Preview3dComponent implements OnInit {
 
     plane.rotation.x = -Math.PI/2;
     plane.position.y = 0;
-    
+
     plane.castShadow = true;
     plane.receiveShadow = true;
 
@@ -66,9 +70,9 @@ export class Preview3dComponent implements OnInit {
 
     this.addShadowedLight( 10, 10, 10, 0xffffff, 1.35 );
     this.addShadowedLight( 5, 10, -10, 0xffaa00, 1 );
-    
+
     this.container.appendChild( this.renderService.renderer.domElement );
-  
+
     window.addEventListener( 'resize', _ => this.onWindowResize());
 
     var controls = new THREE.OrbitControls(this.camera, this.container);
@@ -83,8 +87,8 @@ export class Preview3dComponent implements OnInit {
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
 
+    this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
     this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
-    this.sceneService.addStlToScene('./assets/V3-Setup.stl', 1/1000, 0,0,2, 0xf4a460);
 
     this.animate();
   }
@@ -103,7 +107,7 @@ export class Preview3dComponent implements OnInit {
   }
 
   public onWindowResize() {
-    const width = window.innerWidth;
+    const width = window.innerWidth-5;
     const height = width * 0.72;
 
     this.camera.aspect = width / height;
