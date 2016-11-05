@@ -38,7 +38,7 @@ export class ThreeSceneService{
   }
 
   public removeFromScene(meshName: string) {
-    var children = this.scene.children
+    var children = this.scene.children;
     console.trace("STL: Removing " + meshName);
     for(var i=0; i< children.length; i++){
       if(children[i].name == meshName){
