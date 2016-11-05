@@ -66,7 +66,7 @@ export class Preview3dComponent implements OnInit {
     this.scene = scene;
 
     // Fog
-    scene.fog = new THREE.Fog( 0xffffff, 8, 30 );
+    scene.fog = new THREE.Fog( 0xffffff, 12, 30 );
 
     // Ground
     var planeMat = new THREE.MeshPhongMaterial();
