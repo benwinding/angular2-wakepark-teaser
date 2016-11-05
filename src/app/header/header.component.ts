@@ -12,13 +12,13 @@ export class HeaderComponent implements OnInit {
 
   private remainingTime: number;
   private location: string;
-
+  private eventDate: number = Date.UTC(2017,0,26);
+  
   constructor() { }
 
   ngOnInit() {
-    var time_future = new Date(2017,2,7).getTime();
-    var time_now: any = new Date();
-    time_now = time_now;
+    var time_future = this.eventDate;
+    var time_now: any = Date.now();
     var remainingMillis = time_future - time_now;
     this.remainingTime = Math.round(remainingMillis / 1000);
 

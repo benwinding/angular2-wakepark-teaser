@@ -97,6 +97,7 @@ export class Preview3dComponent implements OnInit {
     this.container.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
+
     var controls = new THREE.OrbitControls(this.camera, this.container);
     this.controls = controls;
     controls.autoRotate = true; // turn on auto rotate

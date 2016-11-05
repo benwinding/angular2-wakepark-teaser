@@ -5,10 +5,25 @@
   <title>Angular2WakeparkTeaser</title>
   <base href="/">
 
+  <style>
+    div > .loadingBlink{
+      width: 100%;
+    }
+    .loadingBlink {
+      animation: blinker 0.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+      text-align: center
+    }
+    @keyframes blinker { to { opacity: 0; } }
+  </style>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div>
+      <h1 class="loadingBlink blinker">loading ...</h1>
+    </div>
+  </app-root>
 </body>
 </html>
