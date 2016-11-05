@@ -8,10 +8,17 @@ var STLLoader = require('three-stl-loader')(THREE);
 
 @Injectable()
 export class ThreeSceneService{
-  constructor(){}
+  constructor(){
+    this.Init();
+  }
   
-  public scene: Scene = new THREE.Scene();
-
+  public scene: Scene;
+  
+  private Init() {
+    this.scene = new THREE.Scene();
+    this.scene.fog = new THREE.Fog( 0xffffff, 12, 30 );
+  }
+  
   public addStlToScene(path: string, scale: number, xpos: number, ypos: number, zpos: number, color: number) {
     var loader = new STLLoader();
     var scene = this.scene;

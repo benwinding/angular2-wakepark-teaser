@@ -8,6 +8,7 @@ import OrbitControls = THREE.OrbitControls;
 import WebGLRenderer = THREE.WebGLRenderer;
 import PerspectiveCamera = THREE.PerspectiveCamera;
 import {ThreeSceneService} from "./three-scene.service";
+import {ThreeRenderService} from "./three-render.service";
 
 @Component({
   selector: 'app-preview3d',
@@ -16,12 +17,14 @@ import {ThreeSceneService} from "./three-scene.service";
 })
 export class Preview3dComponent implements OnInit {
 
-  constructor(private sceneService: ThreeSceneService) { }
+  constructor(
+    private sceneService: ThreeSceneService,
+    private renderService: ThreeRenderService
+  ) { }
 
   @Input()
   public container: HTMLElement;
   public camera: PerspectiveCamera;
-  public renderer: WebGLRenderer;
   public controls: OrbitControls;
 
   ngOnInit() {
@@ -41,17 +44,12 @@ export class Preview3dComponent implements OnInit {
   }
 
   Init(){
-    this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth/window.innerHeight , 1, 50 );
+    this.camera = new THREE.PerspectiveCamera(35 , window.innerWidth/window.innerHeight , 1, 50 );
     this.camera.position.set( 8, 2, 8 );
-
-    var scene = this.sceneService.scene;
-    // Fog
-    scene.fog = new THREE.Fog( 0xffffff, 12, 30 );
-
+  
     // Ground
     var planeMat = new THREE.MeshPhongMaterial();
     planeMat.color.setRGB(0,0,0.8);
-
     var plane = new THREE.Mesh(
       new THREE.PlaneBufferGeometry( 100, 100 ),
       planeMat
@@ -59,22 +57,17 @@ export class Preview3dComponent implements OnInit {
 
     plane.rotation.x = -Math.PI/2;
     plane.position.y = 0;
-
+    
     plane.castShadow = true;
     plane.receiveShadow = true;
 
-    scene.add( plane );
-    scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) );
+    this.sceneService.scene.add( plane );
+    this.sceneService.scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) );
 
     this.addShadowedLight( 10, 10, 10, 0xffffff, 1.35 );
     this.addShadowedLight( 5, 10, -10, 0xffaa00, 1 );
-
-    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    this.renderer.shadowMapEnabled = true;
-    this.renderer.setClearColor( scene.fog.color );
-
-    this.container.appendChild( this.renderer.domElement );
+    
+    this.container.appendChild( this.renderService.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
 
@@ -117,7 +110,7 @@ export class Preview3dComponent implements OnInit {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
   
-    this.renderer.setSize(width, height);
+    this.renderService.renderer.setSize(width, height);
   }
 
   public animate() {
@@ -127,6 +120,6 @@ export class Preview3dComponent implements OnInit {
 
   render() {
     this.controls.update();
-    this.renderer.render( this.sceneService.scene, this.camera );
+    this.renderService.renderer.render( this.sceneService.scene, this.camera );
   }
 }

@@ -13,6 +13,7 @@ import {TabViewModule} from "primeng/primeng";
 import {AccordionModule} from "primeng/primeng";
 import {ButtonModule} from "primeng/components/button/button";
 import {ThreeSceneService} from "./preview3d/three-scene.service";
+import {ThreeRenderService} from "./preview3d/three-render.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import {ThreeSceneService} from "./preview3d/three-scene.service";
     AccordionModule,
     ButtonModule
   ],
-  providers: [ThreeSceneService],
+  providers: [
+    ThreeSceneService,
+    ThreeRenderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
