@@ -5,8 +5,8 @@ body {
   margin: 0;
 }
 
-/*.accordion-layout > .ui-accordion .ui-accordion-content{*/
-  /*margin: 0;*/
-  /*padding-left: 0;*/
-  /*padding-right: 0;*/
-/*}*/
+.accordion-layout > .ui-accordion .ui-accordion-content{
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
