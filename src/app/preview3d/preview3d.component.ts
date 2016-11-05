@@ -30,16 +30,15 @@ export class Preview3dComponent implements OnInit {
 
   private IsPackedUp: boolean = true;
 
-  addStlToScene(path: string){
+  addStlToScene(path: string, scale: number, xpos: number, ypos: number, zpos: number, color: number){
     var loader = new STLLoader();
     var scene = this.scene;
     loader.load( path,  function (geometry){
-      var material = new THREE.MeshPhongMaterial( { color: 0xf4a460, specular: 0x111111, shininess: 20 } );
+      var material = new THREE.MeshPhongMaterial( { color: color, specular: 0x111111, shininess: 20 } );
       var mesh = new THREE.Mesh( geometry, material );
 
-      var scale = 1/1000;
       mesh.scale.set(scale,scale,scale);
-      mesh.position.setZ( -2 );
+      mesh.position.set(xpos, ypos, zpos);
 
       mesh.castShadow = true;
       mesh.receiveShadow = true;
@@ -51,9 +50,9 @@ export class Preview3dComponent implements OnInit {
   onClickSwitch(){
     this.scene.children.pop();
     if(this.IsPackedUp)
-      this.addStlToScene('./assets/V3-Setup.stl');
+      this.addStlToScene('./assets/V3-Setup.stl', 1/1000, 0,0,2, 0xf4a460);
     else
-      this.addStlToScene('./assets/V3-PackedUp-Lower.stl');
+      this.addStlToScene('./assets/V3-PackedUp-Lower.stl', 1/1000, 0,0,2, 0xf4a460);
 
     this.IsPackedUp = !this.IsPackedUp;
   }
@@ -110,7 +109,8 @@ export class Preview3dComponent implements OnInit {
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
 
-    this.addStlToScene('./assets/V3-PackedUp-Lower.stl');
+    this.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
+    this.addStlToScene('./assets/V3-Setup.stl', 1/1000, 0,0,2, 0xf4a460);
 
     this.animate();
   }
