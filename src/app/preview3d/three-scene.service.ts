@@ -16,7 +16,39 @@ export class ThreeSceneService{
 
   private Init() {
     this.scene = new THREE.Scene();
+    // Fog
     this.scene.fog = new THREE.Fog( 0xffffff, 12, 30 );
+
+    // Ground
+    var planeMat = new THREE.MeshPhongMaterial();
+    planeMat.color.setRGB(0,0,0.8);
+    var plane = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry( 100, 100 ),
+      planeMat
+    );
+    plane.rotation.x = -Math.PI/2;
+    plane.position.y = 0;
+    plane.castShadow = true;
+    plane.receiveShadow = true;
+    this.scene.add( plane );
+    
+    // Lights
+    this.scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) );
+    this.addShadowedLight( 10, 10, 10, 0xffffff, 1.35 );
+    this.addShadowedLight( 5, 10, -10, 0xffaa00, 1 );
+  }
+
+  private addShadowedLight( x, y, z, color, intensity ) {
+    
+    var directionalLight = new THREE.DirectionalLight( color, intensity );
+    directionalLight.position.set( x, y, z );
+    this.scene.add( directionalLight );
+    
+    directionalLight.castShadow = true;
+    
+    directionalLight.shadow.mapSize.width = 30;
+    directionalLight.shadow.mapSize.height = 30;
+    directionalLight.shadow.bias = -0.005;
   }
 
   public addStlToScene(path: string, scale: number, xpos: number, ypos: number, zpos: number, color: number) {

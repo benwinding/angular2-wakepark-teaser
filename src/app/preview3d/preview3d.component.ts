@@ -27,54 +27,18 @@ export class Preview3dComponent implements OnInit {
   public camera: PerspectiveCamera;
   public controls: OrbitControls;
 
-  ngOnInit() {
-    this.Init();
-  }
-
   private IsPackedUp: boolean = true;
   private pathSetUp: string = './assets/V3-Setup-Lower.stl';
   private pathPackedUp: string = './assets/V3-PackedUp-Lower.stl';
 
-  onClickSwitch(){
-    if(this.IsPackedUp){
-      this.sceneService.removeFromScene(this.pathSetUp);
-      this.sceneService.addStlToScene(this.pathPackedUp, 1/1000, 0,0,2, 0xf4a460);
-    }
-    else{
-      this.sceneService.removeFromScene(this.pathPackedUp);
-      this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
-    }
-    this.IsPackedUp = !this.IsPackedUp;
-  }
-
-  Init(){
+  ngOnInit() {
     this.camera = new THREE.PerspectiveCamera(35 , window.innerWidth/window.innerHeight , 1, 50 );
     this.camera.position.set( 8, 2, 8 );
-
-    // Ground
-    var planeMat = new THREE.MeshPhongMaterial();
-    planeMat.color.setRGB(0,0,0.8);
-    var plane = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( 100, 100 ),
-      planeMat
-    );
-
-    plane.rotation.x = -Math.PI/2;
-    plane.position.y = 0;
-
-    plane.castShadow = true;
-    plane.receiveShadow = true;
-
-    this.sceneService.scene.add( plane );
-    this.sceneService.scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) );
-
-    this.addShadowedLight( 10, 10, 10, 0xffffff, 1.35 );
-    this.addShadowedLight( 5, 10, -10, 0xffaa00, 1 );
-
+  
     this.container.appendChild( this.renderService.renderer.domElement );
-
+  
     window.addEventListener( 'resize', _ => this.onWindowResize());
-
+  
     var controls = new THREE.OrbitControls(this.camera, this.container);
     this.controls = controls;
     controls.autoRotate = true; // turn on auto rotate
@@ -86,33 +50,30 @@ export class Preview3dComponent implements OnInit {
     controls.maxDistance = 20; // maximum zoom
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
-
+  
     this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
     this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
-
+  
     this.animate();
   }
-
-  addShadowedLight( x, y, z, color, intensity ) {
-
-    var directionalLight = new THREE.DirectionalLight( color, intensity );
-    directionalLight.position.set( x, y, z );
-    this.sceneService.scene.add( directionalLight );
-
-    directionalLight.castShadow = true;
-
-    directionalLight.shadow.mapSize.width = 30;
-    directionalLight.shadow.mapSize.height = 30;
-    directionalLight.shadow.bias = -0.005;
+  
+  onClickSwitch(){
+    if(this.IsPackedUp){
+      this.sceneService.removeFromScene(this.pathSetUp);
+      this.sceneService.addStlToScene(this.pathPackedUp, 1/1000, 0,0,2, 0xf4a460);
+    }
+    else{
+      this.sceneService.removeFromScene(this.pathPackedUp);
+      this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
+    }
+    this.IsPackedUp = !this.IsPackedUp;
   }
-
+  
   public onWindowResize() {
     const width = window.innerWidth-5;
     const height = width * 0.72;
-
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
-
     this.renderService.renderer.setSize(width, height);
   }
 

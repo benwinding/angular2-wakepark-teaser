@@ -5,6 +5,7 @@
 import {Injectable, Inject} from "@angular/core";
 import WebGLRenderer = THREE.WebGLRenderer;
 import {ThreeSceneService} from "./three-scene.service";
+import OrbitControls = THREE.OrbitControls;
 
 @Injectable()
 export class ThreeRenderService{
@@ -17,6 +18,7 @@ export class ThreeRenderService{
   public renderer: WebGLRenderer;
   
   private init() {
+    // Renderer
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.renderer.shadowMapEnabled = true;
