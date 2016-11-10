@@ -17,10 +17,11 @@ export class RenderingService{
   private container: HTMLElement;
   private camera: PerspectiveCamera;
   private controls: OrbitControls;
+  private viewRatio: number = 0.77;
 
   InitRender(inputContainer: HTMLElement) {
     this.container = inputContainer;
-    this.camera = new THREE.PerspectiveCamera(35 , window.innerWidth/window.innerHeight , 1, 50 );
+    this.camera = new THREE.PerspectiveCamera(35 , this.container.clientWidth/this.container.clientHeight, 1, 50 );
     this.camera.position.set( 8, 2, 8 );
 
     this.container.appendChild( this.renderService.renderer.domElement );
@@ -29,26 +30,27 @@ export class RenderingService{
 
     var controls = new THREE.OrbitControls(this.camera, this.container);
     this.controls = controls;
-    controls.autoRotate = true; // turn on auto rotate
-    controls.autoRotateSpeed = 0.06; // speed of auto rotate
-    controls.enableDamping = true; // add inertia
-    controls.dampingFactor = 0.1; // inertia dampening
-    controls.rotateSpeed = 0.1; // set rotation sensitivity
-    controls.minDistance = 1; // minimum zoom
-    controls.maxDistance = 20; // maximum zoom
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.06;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.rotateSpeed = 0.1;
+    controls.minDistance = 1;
+    controls.maxDistance = 20;
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
-    controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
+    controls.target.set(0, 0, 0);
     controls.enableZoom = false;
     
     this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
-
+  
+    this.onWindowResize();
     this.animate();
   }
 
   private onWindowResize() {
-    const width = window.innerWidth-5;
-    const height = width * 0.72;
-    this.camera.aspect = width / height;
+    const width = this.container.clientWidth-5;
+    const height = width * this.viewRatio;
+    this.camera.aspect = width/height;
     this.camera.updateProjectionMatrix();
     this.renderService.renderer.setSize(width, height);
   }

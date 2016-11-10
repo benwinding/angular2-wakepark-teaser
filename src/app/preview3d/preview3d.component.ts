@@ -11,68 +11,64 @@ export class WakeParkItem{
 
 const WakeParkItems: WakeParkItem[] = [
   {
-    name: "Slider 1 Set Up",
-    description: "The slider in action mode!",
+    name: "SliderV3 Active",
+    description:
+    "This shows the slider in the set-up state. It is made up " +
+    "of three separate module which are bolted together using M12 bolts",
     modelPath: "./assets/V3-Setup-Lower.stl",
-    thumbPath: "./assets/V3-Setup-Lower.png"
+    thumbPath: "./assets/V3-Setup-Lower.png",
   },
   {
-    name: "Slider 1 Packed Up",
-    description: "The modular slider in it's packed up state",
+    name: "SliderV3 Transport",
+    description:
+    "When not being used the slider can be dissasembled into it's transport state. " +
+    "The three modules can be unbolted and stacked on top of each other, this provides" +
+    "a relatively compact kit which can also house other gear beneath.",
     modelPath: "./assets/V3-PackedUp-Lower.stl",
-    thumbPath: "./assets/V3-PackedUp-Lower.png"
+    thumbPath: "./assets/V3-PackedUp-Lower.png",
   },
 ];
 
 @Component({
   selector: 'app-preview3d',
   template: `
-  <h1>{{title}}</h1>
+  <h2>Select Preview</h2>
   <div class="ui-g">
     <div *ngFor="let wakeItem of wakeItems" 
     [class.selected]="wakeItem === selectedWakeItem" 
     (click)="onSelect(wakeItem)"
-    class="badge ui-g-3"
+    class="badge ui-g-6 ui-lg-4"
     >    
-      <h3>{{wakeItem.name}}</h3> 
-      <p>{{wakeItem.description}}</p>
+      <h4>{{getNameExcerpt(wakeItem, 18)}}...</h4> 
+      <p>{{getDescriptionExcerpt(wakeItem, 23)}}...</p>
       <img src="./../.{{wakeItem.thumbPath}}"/>
     </div>
   </div>
   <div *ngIf="selectedWakeItem" class="ui-g">
-    <h2>Current Selection: {{selectedWakeItem.name}}</h2>
+    <h2>{{selectedWakeItem.name}}</h2>
+    <p>{{selectedWakeItem.description}}</p>
   </div>  
-  <div class="ui-g">
-    <p-checkbox [(ngModel)]="isAutoRotating" binary="true" (onChange)="toggleAutoRotate($event)"></p-checkbox>
-    Auto Rotate: 
-    <div *ngIf="isAutoRotating">
-      Enabled
-    </div>  
-    <div *ngIf="!isAutoRotating">
-      Disabled
-    </div>  
-  </div>
-  `,
+   `,
   styles: [`
     .selected {
       background-color: #CFD8DC !important;
       color: white;
     }
     .badge img{
-      width: 100%;
+      height: 150px;
+      max-width: 100%;
     }
     .badge {
       background-color: #BBD8DC;
-      color: white;
+      color: black;
       border: solid #607D8B;
+      border-radius: 10px;
     }
   `]
 })
 export class Preview3dComponent implements OnInit, OnDestroy {
-  title: string = "3D Wake Previewer";
   wakeItems: WakeParkItem[] = WakeParkItems;
   selectedWakeItem: WakeParkItem;
-  isAutoRotating: boolean = true;
   
   constructor(
     private renderingService: RenderingService
@@ -97,7 +93,11 @@ export class Preview3dComponent implements OnInit, OnDestroy {
     this.renderingService.LoadStlIntoPreivew(this.selectedWakeItem.modelPath, 1/1000, 0,0,2, 0xf4a460);
   }
   
-  toggleAutoRotate(event: any){
-    this.renderingService.toggleAutoRotate();
+  public getDescriptionExcerpt(wakeItem: WakeParkItem, charCount: number): string{
+    return wakeItem.description.substr(0, charCount);
+  }
+  
+  public getNameExcerpt(wakeItem: WakeParkItem, charCount: number): string{
+    return wakeItem.name.substr(0, charCount);
   }
 }

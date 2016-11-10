@@ -23,7 +23,7 @@ export class ThreeSceneService{
     var planeMat = new THREE.MeshPhongMaterial();
     planeMat.color.setRGB(0,0,0.8);
     var plane = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( 100, 100 ),
+      new THREE.PlaneBufferGeometry( 400, 400 ),
       planeMat
     );
     plane.rotation.x = -Math.PI/2;
@@ -45,9 +45,8 @@ export class ThreeSceneService{
     this.scene.add( directionalLight );
     
     directionalLight.castShadow = true;
-    
-    directionalLight.shadow.mapSize.width = 30;
-    directionalLight.shadow.mapSize.height = 30;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
     directionalLight.shadow.bias = -0.005;
   }
 

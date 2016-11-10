@@ -22,6 +22,7 @@ export class ThreeRenderService{
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.renderer.shadowMapEnabled = true;
+    this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
     this.renderer.setClearColor( this.sceneService.scene.fog.color );
   }
 }
