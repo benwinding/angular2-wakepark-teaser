@@ -1,36 +1,48 @@
-import Camera = THREE.Camera;
 import {Component, OnInit, Input} from '@angular/core';
-import Renderer = THREE.Renderer;
-import Vector3 = THREE.Vector3;
-import Scene = THREE.Scene;
-import TrackballControls = THREE.TrackballControls;
-import OrbitControls = THREE.OrbitControls;
-import WebGLRenderer = THREE.WebGLRenderer;
-import PerspectiveCamera = THREE.PerspectiveCamera;
-import {ThreeSceneService} from "./three-scene.service";
-import {ThreeRenderService} from "./three-render.service";
 import {RenderingService} from "./rendering.service";
+
+
+export class WakeParkItem{
+  public name: string;
+  public description: string;
+  public modelPath: string;
+}
+
+const WakeParkItems: WakeParkItem[] = [
+  {name: "Slider 1 Packed Up", description: "The modular slider in it's packed up state", modelPath: "./assets/V3-PackedUp-Lower.stl"},
+  {name: "Slider 1 Set Up", description: "The slider in action mode!", modelPath: "./assets/V3-Setup-Lower.stl"}
+  ];
+
 
 @Component({
   selector: 'app-preview3d',
   template: `
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <button pbutton type="text" (click)="onClickSwitch()" >Setup/Packup Slider</button>
-    </div>
+  <h1>{{title}}</h1>
+  <ul>
+    <li *ngFor="let wakeItem of wakeItems" [class.selected]="wakeItem === selectedWakeItem" (click)="onSelect(wakeItem)">
+      <span class="badge">{{wakeItem.name}}</span> {{wakeItem.description}}
+    </li>
+  </ul>
+  <div *ngIf="selectedWakeItem">
+    <h2>Current Selection: {{selectedWakeItem.name}}</h2>
   </div>
   `,
   styles: [`
-    div{
-      text-align: center;
+    .badge{
+      
     }
   `]
 })
 export class Preview3dComponent implements OnInit {
 
+  title: string = "3D Wake Previewer";
+  wakeItems: WakeParkItem[] = WakeParkItems;
+  selectedWakeItem: WakeParkItem;
+
   constructor(
     private renderingService: RenderingService
-  ) { }
+  ) {
+  }
 
   @Input()
   public container: HTMLElement;
@@ -39,7 +51,10 @@ export class Preview3dComponent implements OnInit {
     this.renderingService.InitRender(this.container);
   }
 
-  onClickSwitch(){
-    this.renderingService.onClickSwitch();
+  onSelect(itemJustSelected: WakeParkItem){
+    if(this.selectedWakeItem != null)
+      this.renderingService.UnLoadStlIntoPreivew(this.selectedWakeItem.modelPath);
+    this.selectedWakeItem = itemJustSelected;
+    this.renderingService.LoadStlIntoPreivew(this.selectedWakeItem.modelPath, 1/1000, 0,0,2, 0xf4a460);
   }
 }

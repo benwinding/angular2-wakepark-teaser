@@ -14,13 +14,9 @@ export class RenderingService{
     @Inject(ThreeRenderService) private renderService: ThreeRenderService
   ) { }
 
-  public container: HTMLElement;
-  public camera: PerspectiveCamera;
-  public controls: OrbitControls;
-
-  private IsPackedUp: boolean = true;
-  private pathSetUp: string = './assets/V3-Setup-Lower.stl';
-  private pathPackedUp: string = './assets/V3-PackedUp-Lower.stl';
+  private container: HTMLElement;
+  private camera: PerspectiveCamera;
+  private controls: OrbitControls;
 
   InitRender(inputContainer: HTMLElement) {
     this.container = inputContainer;
@@ -43,25 +39,12 @@ export class RenderingService{
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
 
-    this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
     this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
 
     this.animate();
   }
 
-  onClickSwitch(){
-    if(this.IsPackedUp){
-      this.sceneService.removeFromScene(this.pathSetUp);
-      this.sceneService.addStlToScene(this.pathPackedUp, 1/1000, 0,0,2, 0xf4a460);
-    }
-    else{
-      this.sceneService.removeFromScene(this.pathPackedUp);
-      this.sceneService.addStlToScene(this.pathSetUp, 1/1000, 0,0,2, 0xf4a460);
-    }
-    this.IsPackedUp = !this.IsPackedUp;
-  }
-
-  public onWindowResize() {
+  private onWindowResize() {
     const width = window.innerWidth-5;
     const height = width * 0.72;
     this.camera.aspect = width / height;
@@ -69,14 +52,21 @@ export class RenderingService{
     this.renderService.renderer.setSize(width, height);
   }
 
-  public animate() {
+  private animate() {
     window.requestAnimationFrame(_ => this.animate());
     this.render();
   }
 
-  render() {
+  private render() {
     this.controls.update();
     this.renderService.renderer.render( this.sceneService.scene, this.camera );
   }
 
+  public UnLoadStlIntoPreivew(filePath: string) {
+    this.sceneService.removeFromScene(filePath);
+  }
+
+  public LoadStlIntoPreivew(filePath: string, scale: number, xpos: number, ypos: number, zpos: number, color: number) {
+    this.sceneService.addStlToScene(filePath, scale, xpos, ypos, zpos, color);
+  }
 }
