@@ -20,6 +20,7 @@ import { EventDetailsPageComponent } from './event-details-page/event-details-pa
 import { ParkPreviewPageComponent } from './park-preview-page/park-preview-page.component';
 import {routing, appRoutingProviders} from "./app.routing";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {RenderingService} from "./preview3d/rendering.service";
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     appRoutingProviders,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     ThreeSceneService,
-    ThreeRenderService
+    ThreeRenderService,
+    RenderingService
   ],
   bootstrap: [AppComponent]
 })
