@@ -41,7 +41,7 @@ const WakeParkItems: WakeParkItem[] = [
     >    
       <h4>{{getNameExcerpt(wakeItem, 18)}}...</h4> 
       <p>{{getDescriptionExcerpt(wakeItem, 23)}}...</p>
-      <img src="./../.{{wakeItem.thumbPath}}"/>
+      <img src="{{wakeItem.thumbPath}}"/>
     </div>
   </div>
   <div *ngIf="selectedWakeItem" class="ui-g">
