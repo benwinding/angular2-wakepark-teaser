@@ -14,27 +14,40 @@ import {AccordionModule} from "primeng/primeng";
 import {ButtonModule} from "primeng/components/button/button";
 import {ThreeSceneService} from "./preview3d/three-scene.service";
 import {ThreeRenderService} from "./preview3d/three-render.service";
+import {TabMenuModule} from "primeng/components/tabmenu/tabmenu";
+import {PreviewRenderContainerComponent} from "./preview3d/preview-render-container.component";
+import { EventDetailsPageComponent } from './event-details-page/event-details-page.component';
+import { ParkPreviewPageComponent } from './park-preview-page/park-preview-page.component';
+import {routing, appRoutingProviders} from "./app.routing";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    DayshoursPipe,
-    Preview3dComponent,
-    GoogleMapPreviewComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD4mNT9idnzqmKFvioFe2FFElACpprUBH4'
+      apiKey: 'AIzaSyD4mNT9idnzqmKFvioFe2FFElACpprUBH4',
     }),
+    routing,
     TabViewModule,
     AccordionModule,
-    ButtonModule
+    ButtonModule,
+    TabMenuModule
+  ],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    DayshoursPipe,
+    Preview3dComponent,
+    GoogleMapPreviewComponent,
+    PreviewRenderContainerComponent,
+    EventDetailsPageComponent,
+    ParkPreviewPageComponent
   ],
   providers: [
+    appRoutingProviders,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     ThreeSceneService,
     ThreeRenderService
   ],

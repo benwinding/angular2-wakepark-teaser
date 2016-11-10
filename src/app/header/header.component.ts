@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   private remainingTime: number;
   private location: string;
   private eventDate: number = Date.UTC(2017,0,26);
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -21,10 +21,6 @@ export class HeaderComponent implements OnInit {
     var time_now: any = Date.now();
     var remainingMillis = time_future - time_now;
     this.remainingTime = Math.round(remainingMillis / 1000);
-
-    console.trace("Time future: " + time_future);
-    console.trace("Time now: " + time_now);
-    console.trace("Remaining: " + this.remainingTime);
 
     this.location = "Corny Point, South Australia";
 
