@@ -11,7 +11,7 @@ export class WakeParkItem{
 
 const WakeParkItems: WakeParkItem[] = [
   {
-    name: "SliderV3 Active",
+    name: "SliderV3-Active",
     description:
     "This shows the slider in the set-up state. It is made up " +
     "of three separate module which are bolted together using M12 bolts",
@@ -19,7 +19,7 @@ const WakeParkItems: WakeParkItem[] = [
     thumbPath: "./assets/V3-Setup-Lower.png",
   },
   {
-    name: "SliderV3 Transport",
+    name: "SliderV3-Transport",
     description:
     "When not being used the slider can be dissasembled into it's transport state. " +
     "The three modules can be unbolted and stacked on top of each other, this provides" +
