@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {RenderingService} from "./rendering.service";
 
 
@@ -33,8 +33,7 @@ const WakeParkItems: WakeParkItem[] = [
     }
   `]
 })
-export class Preview3dComponent implements OnInit {
-
+export class Preview3dComponent implements OnInit, OnDestroy {
   title: string = "3D Wake Previewer";
   wakeItems: WakeParkItem[] = WakeParkItems;
   selectedWakeItem: WakeParkItem;
@@ -49,6 +48,11 @@ export class Preview3dComponent implements OnInit {
 
   ngOnInit() {
     this.renderingService.InitRender(this.container);
+  }
+
+  ngOnDestroy(): void {
+    if(this.selectedWakeItem != null)
+      this.renderingService.UnLoadStlIntoPreivew(this.selectedWakeItem.modelPath);
   }
 
   onSelect(itemJustSelected: WakeParkItem){
