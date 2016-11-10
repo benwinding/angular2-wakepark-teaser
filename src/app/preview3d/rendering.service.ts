@@ -38,7 +38,8 @@ export class RenderingService{
     controls.maxDistance = 20; // maximum zoom
     controls.maxPolarAngle = Math.PI/2 - .04; // Don't let camera rotate below ground
     controls.target.set(0, 0, 0); // Adjust camera look at target to center on building height
-
+    controls.enableZoom = false;
+    
     this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
 
     this.animate();
@@ -51,7 +52,7 @@ export class RenderingService{
     this.camera.updateProjectionMatrix();
     this.renderService.renderer.setSize(width, height);
   }
-
+  
   private animate() {
     window.requestAnimationFrame(_ => this.animate());
     this.render();
@@ -68,5 +69,9 @@ export class RenderingService{
 
   public LoadStlIntoPreivew(filePath: string, scale: number, xpos: number, ypos: number, zpos: number, color: number) {
     this.sceneService.addStlToScene(filePath, scale, xpos, ypos, zpos, color);
+  }
+  
+  public toggleAutoRotate(){
+    this.controls.autoRotate = !this.controls.autoRotate;
   }
 }

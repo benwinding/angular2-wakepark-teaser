@@ -21,6 +21,7 @@ import { ParkPreviewPageComponent } from './park-preview-page/park-preview-page.
 import {routing, appRoutingProviders} from "./app.routing";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {RenderingService} from "./preview3d/rendering.service";
+import {CheckboxModule} from "primeng/components/checkbox/checkbox";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {RenderingService} from "./preview3d/rendering.service";
     TabViewModule,
     AccordionModule,
     ButtonModule,
-    TabMenuModule
+    TabMenuModule,
+    CheckboxModule
   ],
   declarations: [
     AppComponent,
