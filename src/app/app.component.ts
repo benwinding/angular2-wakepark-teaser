@@ -5,18 +5,19 @@ import {MenuItem} from "primeng/components/common/api";
   selector: 'app-root',
   template: `
     <app-header></app-header>
-    <p-tabMenu [model]="items"></p-tabMenu>
+    <div class="tabMenuContainer">
+      <p-tabMenu [model]="items"></p-tabMenu>
+    </div>
     <router-outlet></router-outlet>
-  `,
-  styleUrls: ['./app.component.css']
+  `
 })
 export class AppComponent implements OnInit{
   private items: MenuItem[];
 
   ngOnInit(): void {
     this.items = [
-      {label: 'Event Info', routerLink: ["/eventDetails"]},
-      {label: 'Park Preview', routerLink: ["/parkPreview"]}
+      {label: 'Event Info', routerLink: ["/eventDetails"], icon: "fa-map"},
+      {label: 'Park Preview', routerLink: ["/parkPreview"], icon: "fa-cubes"}
     ]
   }
 }
