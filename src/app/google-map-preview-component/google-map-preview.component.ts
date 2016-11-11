@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './google-map-preview.component.html',
   styleUrls: ['./google-map-preview.component.css']
 })
-export class GoogleMapPreviewComponent implements OnInit {
+export class GoogleMapPreviewComponent{
 
   constructor() { }
 
@@ -13,7 +13,4 @@ export class GoogleMapPreviewComponent implements OnInit {
   lng: number = 136.9726123;
   label: string = "Corny Point :)";
   zoomLevel: number = 9;
-
-  ngOnInit() {
-  }
 }
