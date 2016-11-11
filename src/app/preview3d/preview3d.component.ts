@@ -9,20 +9,37 @@ export class WakeParkItem{
 
 const WakeParkItems: WakeParkItem[] = [
   {
-    name: "SliderV3-Active",
+    name: "V3 Deployed",
     description:
-    "This shows the slider in the set-up state. It is made up " +
+    "The slider after three iterations of development. This shows the slider in the set-up state. It is made up " +
     "of three separate module which are bolted together using M12 bolts",
     modelPath: "./assets/V3-Setup-Lower.stl",
     thumbPath: "./assets/V3-Setup-Lower.png",
   },
   {
-    name: "SliderV3-Transport",
+    name: "V3 Packed",
     description:
     "When not being used the slider can be dissasembled into it's transport state. " +
     "The three modules can be unbolted and stacked on top of each other, this provides" +
     "a relatively compact kit which can also house other gear beneath.",
     modelPath: "./assets/V3-PackedUp-Lower.stl",
+    thumbPath: "./assets/V3-PackedUp-Lower.png",
+  },
+  {
+    name: "V3-WIDE Deployed",
+    description:
+    "A small redesign on version 3, allowed for the width of the top to be increased for easier riding. This shows the slider in the set-up state. It is made up " +
+    "of three separate module which are bolted together using M12 bolts",
+    modelPath: "./assets/V3W-Setup.stl",
+    thumbPath: "./assets/V3-Setup-Lower.png",
+  },
+  {
+    name: "V3-WIDE Packed",
+    description:
+    "Just like the previous slider, when not being used the slider can be dissasembled into it's transport state. " +
+    "The three modules can be unbolted and stacked on top of each other, this provides" +
+    "a relatively compact kit which can also house other gear beneath.",
+    modelPath: "./assets/V3W-PackedUp.stl",
     thumbPath: "./assets/V3-PackedUp-Lower.png",
   },
 ];
@@ -87,7 +104,7 @@ const WakeParkItems: WakeParkItem[] = [
 export class Preview3dComponent implements OnInit, OnDestroy {
   wakeItems: WakeParkItem[] = WakeParkItems;
   selectedWakeItem: WakeParkItem;
-  
+
   constructor(
     private renderingService: RenderingService
   ){}
@@ -110,11 +127,11 @@ export class Preview3dComponent implements OnInit, OnDestroy {
     this.selectedWakeItem = itemJustSelected;
     this.renderingService.LoadStlIntoPreivew(this.selectedWakeItem.modelPath, 1/1000, 0,0,2, 0xf4a460);
   }
-  
+
   public getDescriptionExcerpt(wakeItem: WakeParkItem, charCount: number): string{
     return wakeItem.description.substr(0, charCount);
   }
-  
+
   public getNameExcerpt(wakeItem: WakeParkItem, charCount: number): string{
     return wakeItem.name.substr(0, charCount);
   }
