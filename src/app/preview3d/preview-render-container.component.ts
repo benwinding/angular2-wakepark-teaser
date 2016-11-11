@@ -9,7 +9,7 @@ import {RenderingService} from "./rendering.service";
   selector: "preview-render-container",
   template: `
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 ui-lg-5">
+      <div class="ui-g-12 ui-md-5 ui-lg-5">
         <app-preview3d [container]="renderHere"></app-preview3d>
       </div>
       <div class="ui-g-12 ui-md-7 ui-lg-7">
