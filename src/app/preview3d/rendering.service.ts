@@ -41,7 +41,7 @@ export class RenderingService{
     controls.target.set(0, 0, 0);
     controls.enableZoom = false;
     
-    this.sceneService.addStlToScene('./assets/manSmall.stl', 1/90, 2,-0.05,3, 0x800000);
+    this.sceneService.addStlToScene('./assets/manSmallest.stl', 1/90, 2,-0.05,3, 0x800000);
   
     this.onWindowResize();
     this.animate();
