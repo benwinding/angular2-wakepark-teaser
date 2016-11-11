@@ -1,7 +1,5 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from "@angular/core";
 import {RenderingService} from "./rendering.service";
-
-
 export class WakeParkItem{
   public name: string;
   public description: string;
@@ -32,16 +30,24 @@ const WakeParkItems: WakeParkItem[] = [
 @Component({
   selector: 'app-preview3d',
   template: `
-  <h2>Select Preview</h2>
+  <h2>Slider Catalogue</h2>
+  <p>click one of the following previews ... </p>
   <div class="ui-g">
     <div *ngFor="let wakeItem of wakeItems" 
     [class.selected]="wakeItem === selectedWakeItem" 
     (click)="onSelect(wakeItem)"
-    class="badge ui-g-6 ui-lg-4"
+    class="ui-g-12"
     >    
-      <h4>{{getNameExcerpt(wakeItem, 18)}}...</h4> 
-      <p>{{getDescriptionExcerpt(wakeItem, 23)}}...</p>
-      <img src="{{wakeItem.thumbPath}}"/>
+      <div class="ui-g badge">
+        <div class="ui-g-8">
+          <h3 class="itemName">{{getNameExcerpt(wakeItem, 18)}}...</h3> 
+        </div>
+        <div class="ui-g-4">
+          <div class="itemThumb">        
+            <img src="{{wakeItem.thumbPath}}"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="selectedWakeItem" class="ui-g">
@@ -50,19 +56,31 @@ const WakeParkItems: WakeParkItem[] = [
   </div>  
    `,
   styles: [`
-    .selected {
-      background-color: #CFD8DC !important;
+    .ui-g-12 {
+      padding: 0.2em;
+    }
+    div > .selected {
+      background-color: #607D8B;
       color: white;
     }
-    .badge img{
-      height: 150px;
+    .itemName{
+      position: relative;
+      margin: auto;
+      padding:0;
+    }
+    .itemThumb img{
       max-width: 100%;
+      height: 3.5em;
     }
     .badge {
-      background-color: #BBD8DC;
+      background-color: #EEEEEE;
       color: black;
       border: solid #607D8B;
       border-radius: 10px;
+      padding: 0.2em;
+    }
+    .badge div{
+      padding: 0;
     }
   `]
 })

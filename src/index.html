@@ -6,12 +6,20 @@
   <base href="/">
 
   <style>
-    div > .loadingBlink{
-      width: 100%;
-    }
     .loadingBlink {
       animation: blinker 0.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
       text-align: center
+    }
+    .centerPage {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 200px;
+      height: 80px;
+      background-color: #EEEEEE;
     }
     @keyframes blinker { to { opacity: 0; } }
   </style>
@@ -21,7 +29,7 @@
 </head>
 <body>
   <app-root>
-    <div>
+    <div class="centerPage">
       <h1 class="loadingBlink blinker">loading ...</h1>
     </div>
   </app-root>
