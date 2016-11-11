@@ -15,28 +15,18 @@ import {RenderingService} from "./rendering.service";
       <div class="ui-g-12 ui-md-6 ui-lg-7">
         <h2>3D Preview Window    </h2>
         <p-checkbox [(ngModel)]="isAutoRotating" binary="true" (onChange)="toggleAutoRotate($event)"></p-checkbox>
-        Auto Rotate: 
-        <div *ngIf="isAutoRotating">
-          Enabled
-        </div>  
-        <div *ngIf="!isAutoRotating">
-          Disabled
-        </div>  
+        Auto Rotate: {{isAutoRotating}}
         <div #renderHere></div>
     </div>
     </div>
   `
 })
-export class PreviewRenderContainerComponent implements OnInit {
-  
+export class PreviewRenderContainerComponent {
   constructor(
     private renderingService: RenderingService
   ){}
   
   isAutoRotating: boolean = true;
-
-  ngOnInit() {
-  }
   
   toggleAutoRotate(event: any){
     this.renderingService.toggleAutoRotate();
