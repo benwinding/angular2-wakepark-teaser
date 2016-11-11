@@ -36,7 +36,7 @@ const WakeParkItems: WakeParkItem[] = [
     <div *ngFor="let wakeItem of wakeItems" 
     [class.selected]="wakeItem === selectedWakeItem" 
     (click)="onSelect(wakeItem)"
-    class="ui-g-12"
+    class="ui-g-12 ui-lg-6"
     >    
       <div class="ui-g badge">
         <div class="ui-g-8">
